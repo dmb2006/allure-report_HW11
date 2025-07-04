@@ -32,3 +32,6 @@ class GitHub:
     def issues_find_documentation(self):
         s('[class^=TokenTextContainer]').should(have.exact_text('documentation'))
 
+    @allure.step('Находим Issues с названием test "issues"')
+    def should_issues_name(self):
+        s('[data-testid="issue-pr-title-link"]').should(have.exact_text('test issues'))

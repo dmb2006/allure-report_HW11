@@ -15,6 +15,7 @@ def test_open_github_selene(browser_configuration):
     s(by.css('a[href="/dmb2006/allure-report_HW11"]')).click()
     s('#issues-tab').click()
     s('[class^=TokenTextContainer]').should(have.exact_text('documentation'))
+    s('[data-testid="issue-pr-title-link"]').should(have.exact_text('test issues'))
 
 def test_open_github_lambda(browser_configuration):
     with allure.step('Открываем главую страницу GitHub'):
@@ -35,6 +36,9 @@ def test_open_github_lambda(browser_configuration):
     with allure.step('Находим Issues с тегом в \'documentation'):
         s('[class^=TokenTextContainer]').should(have.exact_text('documentation'))
 
+    with allure.step('Находим Issues с названием test "issues"'):
+        s('[data-testid="issue-pr-title-link"]').should(have.exact_text('test issues'))
+
 
 def test_open_github_decorator(browser_configuration):
     github = GitHub()
@@ -45,7 +49,7 @@ def test_open_github_decorator(browser_configuration):
     github.click_to_repo()
     github.switching_to_tab_issues()
     github.issues_find_documentation()
-
+    github.should_issues_name()
 
 
 
